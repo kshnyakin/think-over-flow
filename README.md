@@ -20,4 +20,4 @@ Think-over-flow project
 
 * ...
 
-Init 5 Controller testing
+Init 6 Integrational Testing
