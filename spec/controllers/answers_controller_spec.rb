@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe AnswersController, type: :controller do
 
   let(:question) { FactoryBot.create(:question ) }
+  # let(:user) { FactoryBot.create(:user) }
 
   describe 'POST #create' do
 

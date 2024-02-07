@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe QuestionsController, type: :controller do
 
   let(:question) { FactoryBot.create(:question ) }
+  let(:user) { FactoryBot.create(:user) }
 
   describe 'GET #index' do
     let(:questions) { FactoryBot.create_list(:question, 3) }
@@ -26,6 +27,8 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'GET #new' do
+    let(:user) { FactoryBot.create(:user) }
+    before { login(user) }
     before { get :new }
 
     it 'renders new show' do
@@ -34,6 +37,7 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'GET #edit' do
+    before { login(user) }
     before { get :edit, params: { id: question } }
 
     it 'renders edit show' do
@@ -42,6 +46,7 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'POST #create' do
+    before { login(user) }
 
     context 'with valid atrrubites' do
       it 'saves a new question in database' do
@@ -71,6 +76,8 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'PATCH #update' do
+    before { login(user) }
+    
     context 'with valid atrrubites' do
 
       it 'assign the requested question to question' do
@@ -110,6 +117,8 @@ RSpec.describe QuestionsController, type: :controller do
 
 
   describe 'DELETE #destroy' do
+    before { login(user) }
+
     context 'with valid atrrubites' do
       let!(:question) { FactoryBot.create(:question ) }
 
@@ -123,35 +132,6 @@ RSpec.describe QuestionsController, type: :controller do
         delete :destroy, params: { id: question}
         expect(response).to redirect_to questions_path
       end
-
-      # it 'changes question attribute' do
-      #   patch :update, params: { id: question, question: { title: 'new title', body: 'new body'} }
-      #   question.reload
-      #   expect(question.title).to eq('new title')
-      #   expect(question.body).to eq('new body')
-      # end
-
-      # it 'redirect to view of exist question' do
-      #   patch :update, params: { id: question, question: FactoryBot.attributes_for(:question)}
-      #   expect(response).to redirect_to question
-      # end
-
-
     end
-
-    # context 'with invalid atrrubites' do
-    #   before { patch :update, params: { id: question, question: FactoryBot.attributes_for(:question, :invalid) } }
-
-    #   it 'does not change question in database' do
-    #     question.reload
-    #     expect(question.title).to eq('MyString')
-    #     expect(question.body).to eq('MyText')
-    #   end
-
-    #   it 're-render edit view' do
-    #     expect(response).to render_template :edit
-    #   end
-    # end
   end
-
 end
