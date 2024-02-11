@@ -10,6 +10,7 @@ feature 'user can sign in', "In order to ask questions As an unauthenticated use
     fill_in 'Email', with: user.email
     fill_in 'Пароль', with: user.password
     click_on 'Log in'
+    
     expect(page).to have_content 'Вход в систему выполнен'
   end
 

@@ -1,5 +1,4 @@
 class QuestionsController < ApplicationController
-  # skip_before_action :authenticate_user!, except: %i[create edit update destroy new]
   before_action :authenticate_user!, except: %i[index show]
 
   def index
