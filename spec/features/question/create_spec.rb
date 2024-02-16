@@ -1,16 +1,14 @@
 require 'rails_helper'
 
-feature 'user can create question', " In order to get answer from a community as "\
+feature 'user can create question', ' In order to get answer from a community as '\
   "an authenticated user I'd like to be able to ask the question" do
-  
-  given(:user){FactoryBot.create(:user)}
-  
+  given(:user) { FactoryBot.create(:user) }
+
   describe 'Authenticated user' do
-  
     background do
       sign_in(user)
     end
-    
+
     scenario 'asks a question' do
       visit questions_path
       click_on 'Ask question'
@@ -29,15 +27,15 @@ feature 'user can create question', " In order to get answer from a community as
       click_on 'Ask question'
       click_on 'Ask'
 
-      expect(page).to have_content("Title не может быть пустым")
-      expect(page).to have_content("Body не может быть пустым")
+      expect(page).to have_content('Title не может быть пустым')
+      expect(page).to have_content('Body не может быть пустым')
     end
   end
 
   scenario 'Unauthenticated user tries to ask a question' do
     visit questions_path
     click_on 'Ask question'
-    
+
     expect(page).to have_content('Вам необходимо войти в систему или зарегистрироваться.')
   end
 end

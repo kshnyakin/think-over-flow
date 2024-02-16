@@ -1,2 +1,31 @@
 h1= question.title
 p= question.body
+
+hr
+- if @answers.present?
+  h2 Ответы
+  table
+    tr
+      th Ответ
+      th Опции
+    = render @answers
+- else 
+  p Ответов еще не создано
+
+
+
+h2 Знаете ответ? помогите пользователю!
+
+- if user_signed_in?
+  = form_with model: @answer, url: answers_path do |f|
+    = f.label :body
+    = f.text_area :body, name: "answer[body]"
+    = f.hidden_field :author_id, value: current_user.id, name: "answer[author_id]"
+    = f.hidden_field :question_id, value: question.id, name: "answer[question_id]"
+    = f.submit 'Add answer'
+- else 
+  p 
+    = link_to "Авторизуйтесь", new_user_session_path
+    | , чтобы иметь возможность дать ответ на вопрос
+  
+

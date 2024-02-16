@@ -6,14 +6,12 @@ class QuestionsController < ApplicationController
   end
 
   def show
-     
+    @answers = question.answers
   end
 
-  def new
-  end
+  def new; end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @question = Question.new(question_params)
@@ -34,8 +32,12 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    question.destroy
-    redirect_to questions_path
+    if question.author_id == current_user.id
+      question.destroy
+      redirect_to questions_path
+    else
+      redirect_to question_path(question), notice: 'Question can be deleted only by author.'
+    end
   end
 
   private
@@ -47,7 +49,6 @@ class QuestionsController < ApplicationController
   helper_method :question
 
   def question_params
-    params.require(:question).permit(:title, :body)
+    params.require(:question).permit(:title, :body, :author_id)
   end
 end
-

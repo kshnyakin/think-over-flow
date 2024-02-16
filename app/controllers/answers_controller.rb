@@ -1,14 +1,24 @@
 class AnswersController < ApplicationController
+  before_action :authenticate_user!, only: %i[create]
 
-  def new
-  end
+  def new; end
 
   def create
     @answer = question.answers.build(answer_params)
     if @answer.save
-      redirect_to @answer
+      redirect_to question_path(question), notice: 'Your answer successfully added!'
     else
       render :new
+    end
+  end
+
+  def destroy
+    question = answer.question
+    if answer.author_id == current_user.id
+      answer.destroy
+      redirect_to questions_path(question)
+    else
+      redirect_to question_path(question), notice: 'Answer can be deleted only by author.'
     end
   end
 
@@ -18,8 +28,11 @@ class AnswersController < ApplicationController
     @question ||= Question.find(params[:answer][:question_id])
   end
 
+  def answer
+    @question ||= Answer.find(params[:id])
+  end
+
   def answer_params
-    params.require(:answer).permit(:question_id, :body)
+    params.require(:answer).permit(:question_id, :body, :author_id)
   end
 end
-
