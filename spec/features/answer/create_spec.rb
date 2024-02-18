@@ -2,8 +2,8 @@ require 'rails_helper'
 
 feature 'user can create answer', ' In order to give answer on a question of coominity as '\
   "an authenticated user I'd like to be able to answer on the question" do
-  given(:user) { FactoryBot.create(:user) }
-  let(:question) { FactoryBot.create(:question) }
+  given(:user) { create(:user) }
+  let(:question) { create(:question) }
 
   describe 'Authenticated user' do
     # background do

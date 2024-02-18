@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'user can create question', ' In order to get answer from a community as '\
   "an authenticated user I'd like to be able to ask the question" do
-  given(:user) { FactoryBot.create(:user) }
+  given(:user) { create(:user) }
 
   describe 'Authenticated user' do
     background do

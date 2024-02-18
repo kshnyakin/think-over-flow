@@ -2,12 +2,12 @@ require 'rails_helper'
 
 feature 'user can view list of questions', 'User can view list of questions '\
   'no matter authenticated or not' do
-  given(:user) { FactoryBot.create(:user) }
+  given(:user) { create(:user) }
   given(:questions) do
     [
-      FactoryBot.create(:question, title: 'Super question 1', body: 'super_body 1'),
-      FactoryBot.create(:question, title: 'Super question 2', body: 'super_body 2'),
-      FactoryBot.create(:question, title: 'Super question 3', body: 'super_body 3')
+      create(:question, title: 'Super question 1', body: 'super_body 1'),
+      create(:question, title: 'Super question 2', body: 'super_body 2'),
+      create(:question, title: 'Super question 3', body: 'super_body 3')
     ]
   end
 

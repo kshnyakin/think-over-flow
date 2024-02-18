@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'user can sign out', "As authenticated user I'd like to be able to sign out" do
-  given(:user) { FactoryBot.create(:user) }
+  given(:user) { create(:user) }
   background do
     sign_in(user)
     visit questions_path

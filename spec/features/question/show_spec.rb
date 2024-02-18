@@ -2,13 +2,13 @@ require 'rails_helper'
 
 feature 'user can view and create answers from question page',
         'User can view and create answers on question page' do
-  given(:user) { FactoryBot.create(:user) }
-  given(:question) { FactoryBot.create(:question, title: 'Super question 1', body: 'super_body 1', author: user) }
+  given(:user) { create(:user) }
+  given(:question) { create(:question, title: 'Super question 1', body: 'super_body 1', author: user) }
   given(:answers) do
     [
-      FactoryBot.create(:answer, body: 'Do not know!', author: user, question: question),
-      FactoryBot.create(:answer, body: 'It is easy!', author: user, question: question),
-      FactoryBot.create(:answer, body: 'Stupid question', author: user, question: question)
+      create(:answer, body: 'Do not know!', author: user, question: question),
+      create(:answer, body: 'It is easy!', author: user, question: question),
+      create(:answer, body: 'Stupid question', author: user, question: question)
     ]
   end
 

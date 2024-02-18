@@ -1,8 +1,0 @@
-<tr>
-  <td><%= answer.body %></td>
-  <td>
-    <% if current_user&.id == question.author_id %>
-      <%= button_to 'Удалить ответ', question_path(question), method: :delete, data: { confirm: 'Вы действительно хотите удалить вопрос?'} %>
-    <% end %>
-  </td>
-<tr>

@@ -15,4 +15,9 @@ class User < ApplicationRecord
            foreign_key: 'author_id',
            dependent: :destroy,
            inverse_of: :author
+
+  def author_of?(model)
+       id == model.author_id
+  end
+
 end
