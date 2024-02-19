@@ -43,7 +43,7 @@ class QuestionsController < ApplicationController
   private
 
   def question
-    @question ||= Question.find(params[:id]) || Question.new
+    @question ||=  params[:id]? Question.find(params[:id]) : Question.new
   end
 
   helper_method :question

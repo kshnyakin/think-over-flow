@@ -3,40 +3,40 @@ require 'rails_helper'
 feature 'user can create answer', ' In order to give answer on a question of coominity as '\
   "an authenticated user I'd like to be able to answer on the question" do
   given(:user) { create(:user) }
+  given(:answer_text) { 'Ответ на все вопросы'}
   let(:question) { create(:question) }
 
   describe 'Authenticated user' do
-    # background do
-    #   sign_in(user)
-    # end
+    background do
+      sign_in(user)
+    end
 
-    # scenario 'asks a question' do
-    #   visit questions_path
-    #   click_on 'Ask question'
+    scenario 'create an answer' do
+      visit question_path(question)
+      fill_in 'Body', with: answer_text
+      click_on 'Add answer'
 
-    #   fill_in 'Title', with: 'Test question'
-    #   fill_in 'Body', with: 'Text text text'
-    #   click_on 'Ask'
+      expect(page).to have_content(answer_text)
+      expect(question.answers.last.body).to eq(answer_text)
+    end
 
-    #   expect(page).to have_content('Your question successfully created.')
-    #   expect(page).to have_content('Test question')
-    #   expect(page).to have_content('Text text text')
-    # end
+    scenario 'asks a question with errors' do
+      visit question_path(question)
+      click_on 'Add answer'
 
-    # scenario 'asks a question with errors' do
-    #   visit questions_path
-    #   click_on 'Ask question'
-    #   click_on 'Ask'
-
-    #   expect(page).to have_content("Title не может быть пустым")
-    #   expect(page).to have_content("Body не может быть пустым")
-    # end
+      expect(page).to have_content("Body не может быть пустым")
+    end
   end
 
-  # scenario 'Unauthenticated user tries to ask a question' do
-  #   visit questions_path
-  #   click_on 'Ask question'
+  describe 'Unathenticated user' do
 
-  #   expect(page).to have_content('Вам необходимо войти в систему или зарегистрироваться.')
-  # end
+    scenario 'can not create an answer an answer' do
+      visit question_path(question)
+
+      expect(page).to have_content(
+        'Авторизуйтесь, чтобы иметь возможность дать ответ на вопрос'
+      )
+    end
+
+  end
 end

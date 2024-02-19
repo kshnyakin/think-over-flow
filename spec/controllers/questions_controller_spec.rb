@@ -4,6 +4,7 @@ RSpec.describe QuestionsController, type: :controller do
 
   let(:question) { create(:question ) }
   let(:user) { create(:user) }
+  let(:user_not_author) { create(:user) }
 
   describe 'GET #index' do
     let(:questions) { create_list(:question, 3) }
@@ -117,24 +118,36 @@ RSpec.describe QuestionsController, type: :controller do
 
 
   describe 'DELETE #destroy' do
-    before { login(user) }
+    let!(:question) { create(:question, author: user ) }
 
-    context 'with valid atrrubites' do
-      let!(:question) { create(:question, author: user ) }
-
+    context 'when user is an author of question' do
+      before { login(user) }
+      
       it 'delete exist question' do
         expect do
           delete :destroy, params: { id: question}
         end.to change(Question, :count).by(-1)
       end
 
-      it 'redirects to index' do
+      it 'redirects to questions index' do
         delete :destroy, params: { id: question}
         expect(response).to redirect_to questions_path
       end
     end
 
-# Нужно добавить тесты, когда удаление пытается совершить не автор вопроса
+    context 'when user is NOT an author of question' do
+      before { login(user_not_author) }
 
+      it 'not delete exist question' do
+        expect do
+          delete :destroy, params: { id: question}
+        end.not_to change(Question, :count).from(1)
+      end
+
+      it 'redirect to question page' do
+        delete :destroy, params: { id: question}
+        expect(response).to redirect_to question_path(question)
+        end
+    end
   end
 end

@@ -1,3 +1,4 @@
+= render 'shared/errors', resource: @answer
 h1= question.title
 p= question.body
 
@@ -27,5 +28,3 @@ h2 Знаете ответ? помогите пользователю!
   p 
     = link_to "Авторизуйтесь", new_user_session_path
     | , чтобы иметь возможность дать ответ на вопрос
-  
-

@@ -8,7 +8,7 @@ class AnswersController < ApplicationController
     if @answer.save
       redirect_to question_path(question), notice: 'Your answer successfully added!'
     else
-      render :new
+      render '/questions/show', locals: {question: question}
     end
   end
 
@@ -16,7 +16,7 @@ class AnswersController < ApplicationController
     question = answer.question
     if current_user.author_of?(answer)
       answer.destroy
-      redirect_to questions_path(question)
+      redirect_to question_path(question)
     else
       redirect_to question_path(question), notice: 'Answer can be deleted only by author.'
     end
@@ -29,7 +29,7 @@ class AnswersController < ApplicationController
   end
 
   def answer
-    @question ||= Answer.find(params[:id])
+    @answer ||= Answer.find(params[:id])
   end
 
   def answer_params
