@@ -21,7 +21,6 @@ h2 Знаете ответ? помогите пользователю!
   = form_with model: @answer, url: answers_path do |f|
     = f.label :body
     = f.text_area :body, name: "answer[body]"
-    = f.hidden_field :author_id, value: current_user.id, name: "answer[author_id]"
     = f.hidden_field :question_id, value: question.id, name: "answer[question_id]"
     = f.submit 'Add answer'
 - else 

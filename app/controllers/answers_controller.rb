@@ -33,6 +33,6 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:question_id, :body, :author_id)
+    params.require(:answer).permit(:question_id, :body).merge(author_id: current_user.id)
   end
 end

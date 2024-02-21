@@ -5,5 +5,4 @@
   = f.text_field :title, name: "question[title]"
   = f.label :body
   = f.text_area :body, name: "question[body]"
-  = f.hidden_field :author_id, value: current_user.id, name: "question[author_id]"
   = f.submit 'Ask'
