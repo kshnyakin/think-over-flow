@@ -1,0 +1,11 @@
+p= link_to 'Ask question', new_question_path
+
+- if @questions.present?
+  table
+    tr
+      th Заголовок вопроса
+      th Текст вопроса
+      th Опции
+    = render @questions
+- else 
+  p Вопросы еще не созданы.

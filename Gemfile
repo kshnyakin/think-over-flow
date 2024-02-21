@@ -31,6 +31,7 @@ gem 'rubocop-rails', require: false
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'devise'
 gem 'slim-rails'
 
 group :development, :test do
@@ -57,6 +58,7 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver', '>= 4.0.0.rc1'
   # Easy installation and use of web drivers to run system tests with browsers
+  gem 'launchy'
   gem 'rails-controller-testing'
   gem 'shoulda-matchers', '~> 4.5.1'
   gem 'webdrivers'

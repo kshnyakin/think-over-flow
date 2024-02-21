@@ -1,0 +1,9 @@
+tr
+  td
+    = question.title
+  td
+    = question.body   
+  td
+    = link_to 'смотреть ответы', question_path(question)
+    - if current_user&.author_of?(question)
+      p= button_to 'Удалить вопрос', question_path(question), method: :delete, data: { confirm: 'Вы действительно хотите удалить вопрос?'}

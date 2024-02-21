@@ -1,0 +1,6 @@
+tr
+  td
+    = answer.body
+  td
+    - if current_user&.author_of?(answer)
+      = button_to 'Удалить ответ', answer_path(answer), method: :delete, data: { confirm: 'Вы действительно хотите удалить ответ?'}
