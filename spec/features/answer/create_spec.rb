@@ -11,7 +11,7 @@ feature 'user can create answer', ' In order to give answer on a question of coo
       sign_in(user)
     end
 
-    scenario 'create an answer' do
+    scenario 'can create an answer', js: true do
       visit question_path(question)
       fill_in 'Body', with: answer_text
       click_on 'Add answer'
@@ -20,7 +20,7 @@ feature 'user can create answer', ' In order to give answer on a question of coo
       expect(question.answers.last.body).to eq(answer_text)
     end
 
-    scenario 'asks a question with errors' do
+    scenario 'asks a question with errors', js: true do
       visit question_path(question)
       click_on 'Add answer'
 
