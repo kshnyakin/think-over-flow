@@ -25,7 +25,7 @@ class AnswersController < ApplicationController
   private
 
   def question
-    @question ||= Question.find(params[:answer][:question_id])
+    @question ||= Question.find(params[:question_id])
   end
 
   def answer
@@ -33,6 +33,6 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:question_id, :body).merge(author_id: current_user.id)
+    params.require(:answer).permit(:body).merge(author_id: current_user.id)
   end
 end

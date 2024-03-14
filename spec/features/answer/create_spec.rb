@@ -24,6 +24,9 @@ feature 'user can create answer', ' In order to give answer on a question of coo
       visit question_path(question)
       click_on 'Add answer'
 
+      save_and_open_page
+      binding.pry
+      # пофиксить тут тесты
       expect(page).to have_content("Body не может быть пустым")
     end
   end

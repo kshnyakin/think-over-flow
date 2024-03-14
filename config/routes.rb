@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
-  resources :questions
-  resources :answers
+  # переработать роутинг и структуры
+  resources :questions do
+    resources :answers, shallow: true
+  end
   root to: 'questions#index'
 end

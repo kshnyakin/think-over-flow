@@ -19,12 +19,14 @@ hr
 h2 Знаете ответ? помогите пользователю!
 
 - if user_signed_in?
-  = form_with model: @answer, url: answers_path do |f|
+  = form_with model: [question, @answer], local: false do |f|
     = f.label :body
     = f.text_area :body, name: "answer[body]"
-    = f.hidden_field :question_id, value: question.id, name: "answer[question_id]"
     = f.submit 'Add answer'
 - else 
-  p 
+  p
     = link_to "Авторизуйтесь", new_user_session_path
     | , чтобы иметь возможность дать ответ на вопрос
+
+p
+  = link_to "Назад к списку вопросов", questions_path
