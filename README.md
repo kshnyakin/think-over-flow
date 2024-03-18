@@ -20,4 +20,4 @@ Think-over-flow project
 
 * ...
 
-Init 6 Integrational Testing
+Init 7 Ajax in Rails
