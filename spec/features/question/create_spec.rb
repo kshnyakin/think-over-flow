@@ -22,7 +22,7 @@ feature 'user can create question', ' In order to get answer from a community as
       expect(page).to have_content('Text text text')
     end
 
-    scenario 'asks a question with errors' do
+    scenario 'asks a question with errors', js: true do
       visit questions_path
       click_on 'Ask question'
       click_on 'Ask'

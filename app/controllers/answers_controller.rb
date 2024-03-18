@@ -6,9 +6,9 @@ class AnswersController < ApplicationController
   def create
     @answer = question.answers.build(answer_params)
     if @answer.save
-      redirect_to question_path(question), notice: 'Your answer successfully added!'
+      redirect_to question_path(question) #, notice: 'Your answer successfully added!'
     else
-      render '/questions/show', locals: {question: question}
+      # render '/questions/show', locals: {question: question}
     end
   end
 

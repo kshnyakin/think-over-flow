@@ -1,22 +1,25 @@
-.answer-errors
-  = render 'shared/errors', resource: @answer
+
 h1= question.title
 p= question.body
 
 hr
 - if @answers.present?
   h2 Ответы
-  table
-    tr
-      th Ответ
-      th Опции
-    = render @answers
+  .answers 
+    table
+      tr
+        th Ответ
+        th Опции
+      = render @answers
 - else 
   p Ответов еще не создано
 
 
 
 h2 Знаете ответ? помогите пользователю!
+
+.answer-errors
+  = render 'shared/errors', resource: @answer 
 
 - if user_signed_in?
   = form_with model: [question, @answer], local: false do |f|
