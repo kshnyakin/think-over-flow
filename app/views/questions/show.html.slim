@@ -3,33 +3,33 @@ h1= question.title
 p= question.body
 
 hr
-- if @answers.present?
-  h2 Ответы
-  .answers 
-    table
+h2 Ответы
+.answers
+  table
+    - if @answers.present?
       tr
         th Ответ
         th Опции
       = render @answers
-- else 
-  p Ответов еще не создано
-
-
-
-h2 Знаете ответ? помогите пользователю!
+    - else
+      tr
+        td colspan=2 
+          p Ответов еще не создано
+      h2 Знаете ответ? помогите пользователю!
 
 .answer-errors
   = render 'shared/errors', resource: @answer 
 
-- if user_signed_in?
-  = form_with model: [question, @answer], local: false do |f|
-    = f.label :body
-    = f.text_area :body, name: "answer[body]"
-    = f.submit 'Add answer'
-- else 
-  p
-    = link_to "Авторизуйтесь", new_user_session_path
-    | , чтобы иметь возможность дать ответ на вопрос
+p
+  - if user_signed_in?
+    = form_with model: [question, @answer], local: false do |f|
+      = f.label :body
+      = f.text_area :body, name: "answer[body]"
+      = f.submit 'Add answer'
+  - else 
+    p
+      = link_to "Авторизуйтесь", new_user_session_path
+      | , чтобы иметь возможность дать ответ на вопрос
 
 p
   = link_to "Назад к списку вопросов", questions_path
