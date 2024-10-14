@@ -11,19 +11,21 @@ feature 'user can create answer', ' In order to give answer on a question of coo
       sign_in(user)
     end
 
-    scenario 'create an answer' do
+    scenario 'can create an answer', js: true do
       visit question_path(question)
       fill_in 'Body', with: answer_text
       click_on 'Add answer'
 
-      expect(page).to have_content(answer_text)
-      expect(question.answers.last.body).to eq(answer_text)
+      expect(current_path).to eq(question_path(question))
+      within '.answers' do
+        expect(page).to have_content(answer_text)
+        expect(question.answers.last.body).to eq(answer_text)
+      end
     end
 
-    scenario 'asks a question with errors' do
+    scenario 'asks an answer with errors', js: true do
       visit question_path(question)
       click_on 'Add answer'
-
       expect(page).to have_content("Body не может быть пустым")
     end
   end

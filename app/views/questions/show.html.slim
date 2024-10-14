@@ -1,29 +1,36 @@
-= render 'shared/errors', resource: @answer
-h1= question.title
-p= question.body
+
+h1= "Заголовок: #{question.title}"
+p= "Тело вопроса: #{question.body}"
 
 hr
-- if @answers.present?
-  h2 Ответы
-  table
-    tr
-      th Ответ
-      th Опции
+h2 Полученные ответы
+.answers
+  - if @answers.present?
     = render @answers
-- else 
-  p Ответов еще не создано
+  - else
+    p Ответов еще не создано
+      = render @answers
+    - else
+      tr
+        td colspan=4
+          p Ответов еще не создано
+          h2 Знаете ответ? помогите пользователю!
+  br
+.answer-errors
+  = render 'shared/errors', resource: @answer 
 
+p
+  - if user_signed_in?
+    p Форма ответа на вопрос
+    = form_with model: [question, @answer], class: 'new-answer', local: false do |f|
+      = f.label :body
+      = f.text_area :body, name: "answer[body]"
+      = f.submit 'Add answer'
+  - else 
+    p
+      = link_to "Авторизуйтесь", new_user_session_path
+      | , чтобы иметь возможность дать ответ на вопрос
 
-
-h2 Знаете ответ? помогите пользователю!
-
-- if user_signed_in?
-  = form_with model: @answer, url: answers_path do |f|
-    = f.label :body
-    = f.text_area :body, name: "answer[body]"
-    = f.hidden_field :question_id, value: question.id, name: "answer[question_id]"
-    = f.submit 'Add answer'
-- else 
-  p 
-    = link_to "Авторизуйтесь", new_user_session_path
-    | , чтобы иметь возможность дать ответ на вопрос
+p
+  hr
+  = link_to "Назад к списку вопросов", questions_path

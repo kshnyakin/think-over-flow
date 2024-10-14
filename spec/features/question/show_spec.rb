@@ -43,11 +43,10 @@ feature 'user can view and create answers from question page',
       sign_in(user)
     end
 
-    scenario 'can add new answer to question on question page' do
+    scenario 'can add new answer to question on question page', js: true do
       visit question_path(question)
       fill_in 'Body', with: 'Это же элементарно!'
       click_on 'Add answer'
-      expect(page).to have_content('Your answer successfully added!')
       expect(page).to have_content('Это же элементарно!')
     end
 
