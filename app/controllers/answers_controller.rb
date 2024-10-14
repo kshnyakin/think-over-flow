@@ -1,10 +1,15 @@
 class AnswersController < ApplicationController
-  before_action :authenticate_user!, only: %i[create]
+  before_action :authenticate_user!, only: %i[create edit]
 
   def new; end
 
   def create
     @answer = question.answers.create(answer_params)
+  end
+
+  def update
+    answer.update(answer_params)
+    @question = answer.question
   end
 
   def destroy

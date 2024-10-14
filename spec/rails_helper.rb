@@ -39,6 +39,7 @@ RSpec.configure do |config|
   config.include ControllerHelpers, type: :controller
   config.include FeatureHelpers, type: :feature
 
+  # драйвер для браузера капибары 
   Capybara.javascript_driver = :selenium_chrome_headless
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your

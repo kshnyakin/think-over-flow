@@ -1,28 +1,28 @@
 
-h1= question.title
-p= question.body
+h1= "Заголовок: #{question.title}"
+p= "Тело вопроса: #{question.body}"
 
 hr
-h2 Ответы
+h2 Полученные ответы
 .answers
-  table
-    - if @answers.present?
-      tr
-        th Ответ
-        th Опции
+  - if @answers.present?
+    = render @answers
+  - else
+    p Ответов еще не создано
       = render @answers
     - else
       tr
-        td colspan=2 
+        td colspan=4
           p Ответов еще не создано
-      h2 Знаете ответ? помогите пользователю!
-
+          h2 Знаете ответ? помогите пользователю!
+  br
 .answer-errors
   = render 'shared/errors', resource: @answer 
 
 p
   - if user_signed_in?
-    = form_with model: [question, @answer], local: false do |f|
+    p Форма ответа на вопрос
+    = form_with model: [question, @answer], class: 'new-answer', local: false do |f|
       = f.label :body
       = f.text_area :body, name: "answer[body]"
       = f.submit 'Add answer'
@@ -32,4 +32,5 @@ p
       | , чтобы иметь возможность дать ответ на вопрос
 
 p
+  hr
   = link_to "Назад к списку вопросов", questions_path
