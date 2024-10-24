@@ -6,9 +6,8 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    # binding.pry
     @best_answer = question.best_answer
-    @other_answers = question.answers.where.not(id: @best_answer&.id)
+    @other_answers = question.other_answers
     @answer = Answer.new
   end
 

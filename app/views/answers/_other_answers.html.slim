@@ -1,4 +1,4 @@
-- if @other_answer.present?
+- if collection.present?
   h3 Остальные ответы
-  - @other_answers.each do |answer|
+  - collection.each do |answer|
     = render answer

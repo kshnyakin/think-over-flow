@@ -10,6 +10,7 @@ class AnswersController < ApplicationController
   def update
     answer.update(answer_params)
     @question = answer.question
+    @other_answers = @question.other_answers
   end
 
   def destroy

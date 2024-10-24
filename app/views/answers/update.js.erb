@@ -1,5 +1,5 @@
 $('.answer-errors').html('<%= render 'shared/errors', resource: @answer %>');
   <% if !@answer.errors.present? %>
-    $('.answers, .other_answers').html('<%= j render 'answers/other_answers', collection: @question.answers %>');
+    $('.answers .other_answers').html('<%= j render 'answers/other_answers', collection: @other_answers %>');
   <% end %>
  

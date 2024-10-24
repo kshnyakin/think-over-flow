@@ -1,10 +1,12 @@
-p= "[ Ответ ]: #{answer.body} (id = #{answer.id})"
 . id="answer-block-#{answer.id}" 
-- if current_user&.author_of?(answer)
-  p=link_to 'Edit', '#', class: 'edit-answer-link', data: {answer_id: answer.id }
-= form_with model: answer, class: 'hidden', local: false, html: { id: "edit-answer-#{answer.id}"} do |f|
-  = f.label :body, 'Your answer'
-  = f.text_area :body 
-  = f.submit 'Save'
-p = button_to 'Удалить ответ', answer_path(answer), method: :delete, remote: true, data: { confirm: 'Вы действительно хотите удалить ответ?'}
-hr
+  p= "[ Ответ ]: #{answer.body} (id = #{answer.id})"
+  - if current_user&.author_of?(answer)
+    p=link_to 'Edit', '#', class: 'edit-answer-link', data: {answer_id: answer.id }
+  = form_with model: answer, class: 'hidden', local: false, html: { id: "edit-answer-#{answer.id}"} do |f|
+    = f.label :body, 'Your answer'
+    = f.text_area :body 
+    = f.submit 'Save'
+  p = button_to 'Удалить ответ', answer_path(answer), method: :delete, remote: true, data: { confirm: 'Вы действительно хотите удалить ответ?'}
+  - if current_user&.author_of?(answer.question)
+    span = button_to 'Выбрать ответ лучшим', answer_path(answer), method: :delete, remote: true, data: { confirm: 'Вы действительно хотите удалить ответ?'}
+  hr

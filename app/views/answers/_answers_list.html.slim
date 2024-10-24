@@ -1,5 +1,8 @@
-- if best_answer.present?
-  .best_answer= render 'answers/best_answer', resource: best_answer
-- if other_answers.present?
-  .other_answers= render 'answers/other_answers', collection: other_answers
+.best_answer
+  - if best_answer.present?
+    = render 'answers/best_answer', resource: best_answer
+
+.other_answers
+  - if other_answers.present?
+    = render 'answers/other_answers', collection: other_answers
   
