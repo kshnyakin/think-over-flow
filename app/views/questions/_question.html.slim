@@ -1,4 +1,4 @@
-tr
+tr id="question-row-#{question.id}" 
   td
     = question.title
   td
@@ -6,4 +6,4 @@ tr
   td
     = link_to 'смотреть ответы', question_path(question)
     - if current_user&.author_of?(question)
-      p= button_to 'Удалить вопрос', question_path(question), method: :delete, data: { confirm: 'Вы действительно хотите удалить вопрос?'}
+      p= button_to 'Удалить вопрос', question_path(question), method: :delete, remote: true, data: { confirm: 'Вы действительно хотите удалить вопрос?'}

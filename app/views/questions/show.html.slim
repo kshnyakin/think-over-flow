@@ -5,16 +5,14 @@ p= "Тело вопроса: #{question.body}"
 hr
 h2 Полученные ответы
 .answers
-  - if @answers.present?
-    = render @answers
-  - else
-    p Ответов еще не создано
-      = render @answers
-    - else
-      tr
-        td colspan=4
-          p Ответов еще не создано
-          h2 Знаете ответ? помогите пользователю!
+  = render 'answers/answers_list', best_answer: @best_answer, other_answers: @other_answers
+  / p Лучший ответ
+  / = render 'answers/best_answer', resource: @best_answer
+  / hr
+  / - if @other_answers.present?
+  /   = render 'answers/other_answers', collection: @other_answers
+  / - else
+  /   p Ответов еще не создано
   br
 .answer-errors
   = render 'shared/errors', resource: @answer 

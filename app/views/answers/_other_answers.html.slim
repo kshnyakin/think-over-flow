@@ -1,0 +1,4 @@
+- if @other_answer.present?
+  h3 Остальные ответы
+  - @other_answers.each do |answer|
+    = render answer

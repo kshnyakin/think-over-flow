@@ -13,12 +13,13 @@ class AnswersController < ApplicationController
   end
 
   def destroy
+    # binding.pry
     question = answer.question
     if current_user.author_of?(answer)
       answer.destroy
-      redirect_to question_path(question)
+      # redirect_to question_path(question)
     else
-      redirect_to question_path(question), notice: 'Answer can be deleted only by author.'
+      # redirect_to question_path(question), notice: 'Answer can be deleted only by author.'
     end
   end
 

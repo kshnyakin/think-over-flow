@@ -6,7 +6,9 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @answers = question.answers
+    # binding.pry
+    @best_answer = question.best_answer
+    @other_answers = question.answers.where.not(id: @best_answer&.id)
     @answer = Answer.new
   end
 
@@ -34,9 +36,9 @@ class QuestionsController < ApplicationController
   def destroy
     if current_user.author_of?(question)
       question.destroy
-      redirect_to questions_path
+      # redirect_to questions_path
     else
-      redirect_to question_path(question), notice: 'Question can be deleted only by author.'
+      # redirect_to question_path(question), notice: 'Question can be deleted only by author.'
     end
   end
 
